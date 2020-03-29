@@ -35,6 +35,11 @@ public class Game extends Application {
     private void nextTurn(MouseEvent e) {
         System.out.println("Next turn!!");
         board.render(lifeforms);
+        
+        for (Lifeform[] row : lifeforms)
+            for (Lifeform curLife : row)
+                if (curLife != null)
+                    curLife.update(lifeforms);
     }
     
     private void populateBoard() {

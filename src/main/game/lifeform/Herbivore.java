@@ -10,7 +10,7 @@ public class Herbivore extends Lifeform {
     }
 
     @Override
-    void move() {
+    public void update(Lifeform[][] lifeforms) {
         
     }
     

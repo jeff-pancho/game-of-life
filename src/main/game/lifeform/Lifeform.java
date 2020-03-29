@@ -1,6 +1,7 @@
 package main.game.lifeform;
 
 import javafx.scene.paint.Color;
+import main.game.Board;
 
 public abstract class Lifeform {
     protected int row;
@@ -12,7 +13,11 @@ public abstract class Lifeform {
         this.col = col;
     }
     
-    abstract void move();
+    public abstract void update(Lifeform[][] lifeforms);
+    
+    public boolean inBounds(Lifeform[][] lifeforms, int row, int col) {
+        return row >= 0 && row < Board.SIZE && col >= 0 && col < Board.SIZE;
+    }
     
     public int getRow() {
         return this.row;
