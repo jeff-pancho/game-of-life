@@ -21,7 +21,6 @@ public class Plant extends Lifeform {
         int adjacentPlants = 0;
         
         for (int i = 0; i < 8; i++) {
-            // Big brain trig calculations to look at adjacent squares
             double dir = i * eightDir;
             int curRow = (int) Math.round(row + Math.sin(dir));
             int curCol = (int) Math.round(col + Math.cos(dir));
@@ -38,8 +37,7 @@ public class Plant extends Lifeform {
             
         }
         
-        // The magic of reproduction
-        if (adjacentPlants >= 4 && emptyCells.size() >= 3) {
+        if (adjacentPlants == 4 && emptyCells.size() >= 3) {
             Random rand = new Random();
             Point2D randCell = emptyCells.get(rand.nextInt(emptyCells.size()));
             int newRow = (int) randCell.getY();
