@@ -6,23 +6,45 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import main.game.lifeform.Lifeform;
+import main.game.lifeform.Plant;
+
 public class Game extends Application {
+    Lifeform[][] lifeforms;
+    Board board;
+    Group root;
+    Scene scene;
     
     @Override
     public void start(Stage stage) throws Exception {
-        Board board = new Board(Board.WIDTH, Board.HEIGHT);
-        Group root = new Group(board);
-        Scene scene = new Scene(root, Board.WIDTH, Board.HEIGHT);
-        
+        board = new Board(Board.WIDTH, Board.HEIGHT);
+        root = new Group(board);
+        scene = new Scene(root, Board.WIDTH, Board.HEIGHT);
         initStage(stage, scene);
         
-        board.render();
+        lifeforms = new Lifeform[Board.SIZE][Board.SIZE];
+        
+        RandomGenerator.reset();
+        
+        populateBoard();
+        board.render(lifeforms);
         
         scene.setOnMouseClicked(this::nextTurn);
     }
     
     private void nextTurn(MouseEvent e) {
-        System.out.println("Next turn!!!");
+        System.out.println("Next turn!!");
+        board.render(lifeforms);
+    }
+    
+    private void populateBoard() {
+        for (int row = 0; row < lifeforms.length; row++) {
+            for (int col = 0; col < lifeforms[row].length; col++) {
+                final int randInt = RandomGenerator.nextNumber(100);
+                if (randInt >= 75)
+                    lifeforms[row][col] = new Plant(row, col);
+            }
+        }
     }
     
     private void initStage(Stage stage, Scene scene) {
