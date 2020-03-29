@@ -19,6 +19,14 @@ public abstract class Lifeform {
         return row >= 0 && row < Board.SIZE && col >= 0 && col < Board.SIZE;
     }
     
+    public void setPos(Lifeform[][] lifeforms, int newRow, int newCol) {
+        lifeforms[newRow][newCol] = this;
+        lifeforms[row][col] = null;
+        
+        this.row = newRow;
+        this.col = newCol;
+    }
+    
     public int getRow() {
         return this.row;
     }
