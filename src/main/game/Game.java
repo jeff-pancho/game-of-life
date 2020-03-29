@@ -5,7 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+import main.game.lifeform.Herbivore;
 import main.game.lifeform.Lifeform;
 import main.game.lifeform.Plant;
 
@@ -41,8 +41,10 @@ public class Game extends Application {
         for (int row = 0; row < lifeforms.length; row++) {
             for (int col = 0; col < lifeforms[row].length; col++) {
                 final int randInt = RandomGenerator.nextNumber(100);
-                if (randInt >= 75)
+                if (randInt <= 20)
                     lifeforms[row][col] = new Plant(row, col);
+                else if (randInt > 20 && randInt <= 35)
+                    lifeforms[row][col] = new Herbivore(row, col);
             }
         }
     }
