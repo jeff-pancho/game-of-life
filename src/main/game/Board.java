@@ -20,13 +20,15 @@ public class Board extends Canvas {
     }
     
     public void render(Lifeform[][] lifeforms) {
+        gc.clearRect(0, 0, WIDTH, HEIGHT);
+        
         for (Lifeform[] row : lifeforms)
             for (Lifeform curLife : row)
                 if (curLife != null)
                     renderLifeform(curLife);
         
         // render grid
-        gc.setLineWidth(1);
+        gc.setLineWidth(2);
         gc.setStroke(Color.BLACK);
         
         for (int i = 0; i < SIZE; i++) {
