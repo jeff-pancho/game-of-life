@@ -51,10 +51,10 @@ public class Game extends Application {
         for (int row = 0; row < lifeforms.length; row++) {
             for (int col = 0; col < lifeforms[row].length; col++) {
                 final int randInt = RandomGenerator.nextNumber(100);
-                if (randInt <= 20)
-                    lifeforms[row][col] = new Plant(row, col);
-                else if (randInt > 20 && randInt <= 35)
+                if (randInt >= 85)
                     lifeforms[row][col] = new Herbivore(row, col);
+                else if (randInt >= 65 && randInt < 85)
+                    lifeforms[row][col] = new Plant(row, col);
             }
         }
     }
