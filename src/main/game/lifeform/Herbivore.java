@@ -20,6 +20,9 @@ public class Herbivore extends Lifeform {
 
     @Override
     public void update(Lifeform[][] lifeforms) {
+        if (updated)
+            return;
+        
         final double eightDir = Math.PI / 4;
         List<Point2D> availableCells = new ArrayList<>();
         
@@ -51,6 +54,9 @@ public class Herbivore extends Lifeform {
         
         if (turnsLeft-- <= 0)
             lifeforms[row][col] = null;
+        
+        updated = true;
+        
     }
     
 }

@@ -40,6 +40,11 @@ public class Game extends Application {
             for (Lifeform curLife : row)
                 if (curLife != null)
                     curLife.update(lifeforms);
+        
+        for (Lifeform[] row : lifeforms)
+            for (Lifeform curLife : row)
+                if (curLife != null)
+                    curLife.setUpdated(false);
     }
     
     private void populateBoard() {

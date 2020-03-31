@@ -7,10 +7,12 @@ public abstract class Lifeform {
     protected int row;
     protected int col;
     protected Color color;
+    protected boolean updated;
     
     public Lifeform(int row, int col) {
         this.row = row;
         this.col = col;
+        this.updated = false;
     }
     
     public abstract void update(Lifeform[][] lifeforms);
@@ -37,5 +39,9 @@ public abstract class Lifeform {
     
     public Color getColor() {
         return this.color;
+    }
+    
+    public void setUpdated(boolean updated) {
+        this.updated = updated;
     }
 }

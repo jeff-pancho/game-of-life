@@ -16,6 +16,9 @@ public class Plant extends Lifeform {
 
     @Override
     public void update(Lifeform[][] lifeforms) {
+        if (updated)
+            return;
+        
         final double eightDir = Math.PI / 4;
         List<Point2D> emptyCells = new ArrayList<>();
         int adjacentPlants = 0;
@@ -44,6 +47,8 @@ public class Plant extends Lifeform {
             int newCol = (int) randCell.getX();
             lifeforms[newRow][newCol] = new Plant(newRow, newCol);
         }
+        
+        updated = true;
         
     }
 
