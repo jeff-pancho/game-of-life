@@ -8,7 +8,7 @@ import main.game.lifeform.Lifeform;
 
 public class Board extends Canvas {
     public static final int TILE_SIZE = 35;
-    public static final int SIZE = 24;
+    public static final int SIZE = 25;
     public static final int WIDTH = TILE_SIZE * SIZE;
     public static final int HEIGHT = TILE_SIZE * SIZE;
     
