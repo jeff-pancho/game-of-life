@@ -42,8 +42,12 @@ public class Plant extends Lifeform {
                 adjacentPlants++;
         }
         
-        if (adjacentPlants >= 4 && availableCells.size() >= 3) {
-            final int randInd = RandomGenerator.nextNumber(10) % availableCells.size();
+        if (adjacentPlants == 4 && availableCells.size() >= 3) {
+            int randInd = RandomGenerator.nextNumber(10);
+            while (randInd >= availableCells.size()) {
+                randInd = RandomGenerator.nextNumber(10);
+            }
+            
             Point2D randCell = availableCells.get(randInd);
             int newRow = (int) randCell.getY();
             int newCol = (int) randCell.getX();

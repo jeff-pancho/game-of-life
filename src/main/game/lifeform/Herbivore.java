@@ -44,7 +44,11 @@ public class Herbivore extends Lifeform {
         }
         
         if (availableCells.size() >= 1) {
-            final int randInd = RandomGenerator.nextNumber(10) % availableCells.size();
+            int randInd = RandomGenerator.nextNumber(10);
+            while (randInd >= availableCells.size()) {
+                randInd = RandomGenerator.nextNumber(10);
+            }
+            
             Point2D randCell = availableCells.get(randInd);
             int newRow = (int) randCell.getY();
             int newCol = (int) randCell.getX();
