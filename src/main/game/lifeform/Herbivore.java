@@ -17,7 +17,7 @@ public class Herbivore extends Lifeform {
         super(row, col);
         this.color = Color.rgb(242, 197, 104);
         this.lifespan = 5;
-        this.turnsLeft = 5;
+        this.turnsLeft = this.lifespan;
     }
 
     @Override
