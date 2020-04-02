@@ -11,6 +11,7 @@ public class Board extends Canvas {
     public static final int SIZE = 25;
     public static final int WIDTH = TILE_SIZE * SIZE;
     public static final int HEIGHT = TILE_SIZE * SIZE;
+    public static final Color gridColor = Color.rgb(77, 57, 81);
     
     private GraphicsContext gc;
     
@@ -22,14 +23,20 @@ public class Board extends Canvas {
     public void render(Lifeform[][] lifeforms) {
         gc.clearRect(0, 0, WIDTH, HEIGHT);
         
-        for (Lifeform[] row : lifeforms)
-            for (Lifeform curLife : row)
-                if (curLife != null)
+        Lifeform curLife;
+        
+        for (int row = 0; row < lifeforms.length; row++)
+            for (int col = 0; col < lifeforms[row].length; col++)
+                if ((curLife = lifeforms[row][col]) != null)
                     renderLifeform(curLife);
+                else {
+                    Color rectColor = (row + col) % 2 == 0 ? Color.rgb(242, 245, 255) : Color.rgb(218, 218, 242);
+                    renderRect(row, col, rectColor);
+                }
         
         // render grid
         gc.setLineWidth(2);
-        gc.setStroke(Color.BLACK);
+        gc.setStroke(gridColor);
         
         for (int i = 0; i < SIZE; i++) {
             gc.strokeLine(i * TILE_SIZE, 0, i * TILE_SIZE, HEIGHT);
@@ -37,9 +44,13 @@ public class Board extends Canvas {
         }
     }
     
+    private void renderRect(int row, int col, Color color) {
+        gc.setFill(color);
+        gc.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+    }
+    
     private void renderLifeform(Lifeform curLife) {
-        gc.setFill(curLife.getColor());
-        gc.fillRect(curLife.getCol() * TILE_SIZE, curLife.getRow() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        renderRect(curLife.getRow(), curLife.getCol(), curLife.getColor());
     }
 
 }

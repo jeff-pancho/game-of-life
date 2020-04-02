@@ -13,7 +13,7 @@ public class Herbivore extends Lifeform {
 
     public Herbivore(int row, int col) {
         super(row, col);
-        this.color = Color.YELLOW;
+        this.color = Color.rgb(242, 197, 104);
         this.lifespan = 5;
         this.turnsLeft = 5;
     }

@@ -11,7 +11,7 @@ public class Plant extends Lifeform {
     
     public Plant(int x, int y) {
         super(x, y);
-        this.color = Color.GREEN;
+        this.color = Color.rgb(58, 170, 52);
     }
 
     @Override
