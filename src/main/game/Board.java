@@ -3,7 +3,7 @@ package main.game;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
+import main.game.cell.Cell;
 import main.game.lifeform.Lifeform;
 
 public class Board extends Canvas {
@@ -20,19 +20,20 @@ public class Board extends Canvas {
         this.gc = getGraphicsContext2D();
     }
     
-    public void render(Lifeform[][] lifeforms) {
+    public void render(Cell[][] cells) {
         gc.clearRect(0, 0, WIDTH, HEIGHT);
         
-        Lifeform curLife;
-        
-        for (int row = 0; row < lifeforms.length; row++)
-            for (int col = 0; col < lifeforms[row].length; col++)
-                if ((curLife = lifeforms[row][col]) != null)
-                    renderLifeform(curLife);
+        for (int row = 0; row < cells.length; row++)
+            for (int col = 0; col < cells[row].length; col++) {
+                Cell curCell = cells[row][col];
+                Lifeform curLife = curCell.getLifeform();
+                if (curLife != null)
+                    renderRect(row, col, curLife.getColor());
                 else {
-                    Color rectColor = (row + col) % 2 == 0 ? Color.rgb(242, 245, 255) : Color.rgb(218, 218, 242);
-                    renderRect(row, col, rectColor);
+                    Color color = (row + col) % 2 == 0 ? curCell.getColor() : curCell.getAltColor();
+                    renderRect(row, col, color);
                 }
+            }
         
         // render grid
         gc.setLineWidth(2);
@@ -47,10 +48,6 @@ public class Board extends Canvas {
     private void renderRect(int row, int col, Color color) {
         gc.setFill(color);
         gc.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-    }
-    
-    private void renderLifeform(Lifeform curLife) {
-        renderRect(curLife.getRow(), curLife.getCol(), curLife.getColor());
     }
 
 }

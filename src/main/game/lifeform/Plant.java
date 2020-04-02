@@ -2,10 +2,12 @@ package main.game.lifeform;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
+
+import main.game.cell.Cell;
+import main.game.RandomGenerator;
 
 public class Plant extends Lifeform {
     
@@ -15,12 +17,12 @@ public class Plant extends Lifeform {
     }
 
     @Override
-    public void update(Lifeform[][] lifeforms) {
+    public void update(Cell[][] cells) {
         if (updated)
             return;
         
         final double eightDir = Math.PI / 4;
-        List<Point2D> emptyCells = new ArrayList<>();
+        List<Point2D> availableCells = new ArrayList<>();
         int adjacentPlants = 0;
         
         for (int i = 0; i < 8; i++) {
@@ -28,24 +30,24 @@ public class Plant extends Lifeform {
             int curRow = (int) Math.round(row + Math.sin(dir));
             int curCol = (int) Math.round(col + Math.cos(dir));
             
-            if (!inBounds(lifeforms, curRow, curCol))
+            if (!inBounds(cells, curRow, curCol))
                 continue;
             
-            Lifeform curLife = lifeforms[curRow][curCol];
+            Cell curCell = cells[curRow][curCol];
+            Lifeform curLife = curCell.getLifeform();
             
             if (curLife == null)
-                emptyCells.add(new Point2D(curCol, curRow));
+                availableCells.add(new Point2D(curCol, curRow));
             else if (curLife instanceof Plant)
                 adjacentPlants++;
-            
         }
         
-        if (adjacentPlants == 4 && emptyCells.size() >= 3) {
-            Random rand = new Random();
-            Point2D randCell = emptyCells.get(rand.nextInt(emptyCells.size()));
+        if (adjacentPlants >= 4 && availableCells.size() >= 3) {
+            final int randInd = RandomGenerator.nextNumber(10) % availableCells.size();
+            Point2D randCell = availableCells.get(randInd);
             int newRow = (int) randCell.getY();
             int newCol = (int) randCell.getX();
-            lifeforms[newRow][newCol] = new Plant(newRow, newCol);
+            cells[newRow][newCol].setLifeform(new Plant(newRow, newCol));
         }
         
         updated = true;

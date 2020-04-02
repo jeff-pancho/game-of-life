@@ -1,7 +1,7 @@
 package main.game.lifeform;
 
 import javafx.scene.paint.Color;
-import main.game.Board;
+import main.game.cell.Cell;
 
 public abstract class Lifeform {
     protected int row;
@@ -15,15 +15,15 @@ public abstract class Lifeform {
         this.updated = false;
     }
     
-    public abstract void update(Lifeform[][] lifeforms);
+    public abstract void update(Cell[][] cells);
     
-    public boolean inBounds(Lifeform[][] lifeforms, int row, int col) {
-        return row >= 0 && row < Board.SIZE && col >= 0 && col < Board.SIZE;
+    public boolean inBounds(Cell[][] cells, int row, int col) {
+        return row >= 0 && row < cells.length && col >= 0 && col < cells[row].length;
     }
     
-    public void setPos(Lifeform[][] lifeforms, int newRow, int newCol) {
-        lifeforms[newRow][newCol] = this;
-        lifeforms[row][col] = null;
+    public void setPos(Cell[][] cells, int newRow, int newCol) {
+        cells[newRow][newCol].setLifeform(this);
+        cells[row][col].setLifeform(null);
         
         this.row = newRow;
         this.col = newCol;
