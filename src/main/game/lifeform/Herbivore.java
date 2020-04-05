@@ -49,7 +49,7 @@ public class Herbivore extends Lifeform {
             int newRow = (int) randCell.getY();
             int newCol = (int) randCell.getX();
             
-            if (cells[newRow][newCol].getLifeform() instanceof PlantEdible)
+            if (cells[newRow][newCol].getLifeform() instanceof EdibleForHerbivore)
                 turnsLeft = lifespan;
             
             setPos(cells, newRow, newCol);
