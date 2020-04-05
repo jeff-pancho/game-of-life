@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import main.game.cell.Cell;
 import main.game.RandomGenerator;
 
-public class Plant extends Lifeform {
+public class Plant extends Lifeform implements PlantEdible {
     
     public Plant(int x, int y) {
         super(x, y);
