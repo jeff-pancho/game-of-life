@@ -59,18 +59,18 @@ public class Game extends Application {
     }
     
     private void populateBoard() {
-//        for (int row = 0; row < cells.length; row++) {
-//            for (int col = 0; col < cells[row].length; col++) {
-//                Cell curCell = new Land(row, col);
-//                cells[row][col] = curCell;
-//                
-//                final int randInt = RandomGenerator.nextNumber(100);
-//                if (randInt >= 85)
-//                    curCell.setLifeform(new Herbivore(row, col));
-//                else if (randInt >= 65 && randInt < 85)
-//                    curCell.setLifeform(new Plant(row, col));
-//            }
-//        }
+        for (int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells[row].length; col++) {
+                Cell curCell = new Land(row, col);
+                cells[row][col] = curCell;
+                
+                final int randInt = RandomGenerator.nextNumber(100);
+                if (randInt >= 85)
+                    curCell.setLifeform(new Herbivore(row, col));
+                else if (randInt >= 65 && randInt < 85)
+                    curCell.setLifeform(new Plant(row, col));
+            }
+        }
     }
     
     private void initStage(Stage stage, Scene scene) {

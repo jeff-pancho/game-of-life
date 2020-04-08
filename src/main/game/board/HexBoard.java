@@ -2,12 +2,13 @@ package main.game.board;
 
 import javafx.scene.paint.Color;
 import main.game.cell.Cell;
+import main.game.lifeform.Lifeform;
 
 public class HexBoard extends Board {
     public static final double APOTHEM = (double) WIDTH / (SIZE * 2 + 1);
     public static final double RADIUS = APOTHEM / Math.cos(Math.PI / 6);
     public static final double Y_INCREMENT = APOTHEM * Math.sqrt(3);
-    public static final double Y_OFFSET = (HEIGHT - (24 * APOTHEM * Math.sqrt(3) + RADIUS * 2)) / 2;
+    public static final double Y_OFFSET = (HEIGHT - ((SIZE - 2) * APOTHEM * Math.sqrt(3) + RADIUS * 2)) / 2;
 
     public HexBoard(double width, double height) {
         super(width, height);
@@ -17,11 +18,20 @@ public class HexBoard extends Board {
     public void render(Cell[][] cells) {
         gc.clearRect(0, 0, WIDTH, HEIGHT);
         
-        // render grid
-        for (int i = 0; i < 25; i++)
-            for (int j = 0; j < 25; j++) {
-                final double xOffset = i % 2 == 0 ? APOTHEM : APOTHEM * 2;
-                renderHexagon(xOffset + (APOTHEM * 2) * j, Y_OFFSET + Y_INCREMENT * i, RADIUS, Color.BLACK, false);
+        for (int row = 0; row < cells.length; row++)
+            for (int col = 0; col < cells[row].length; col++) {
+                final double xOffset = row % 2 == 0 ? APOTHEM : APOTHEM * 2;
+                final double centerX = xOffset + (APOTHEM * 2) * col;
+                final double centerY = Y_OFFSET + Y_INCREMENT * row;
+                
+                Cell curCell = cells[row][col];
+                Lifeform curLife = curCell.getLifeform();
+                boolean hasLife = curLife != null;
+                
+                Color color = hasLife ? curLife.getColor() : curCell.getColor();
+                
+                renderHexagon(centerX, centerY, RADIUS, color, true);
+                renderHexagon(centerX, centerY, RADIUS, gridColor, false);
             }
         
     }
