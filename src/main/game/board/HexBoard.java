@@ -4,6 +4,10 @@ import javafx.scene.paint.Color;
 import main.game.cell.Cell;
 
 public class HexBoard extends Board {
+    public static final double APOTHEM = (double) WIDTH / (SIZE * 2 + 1);
+    public static final double RADIUS = APOTHEM / Math.cos(Math.PI / 6);
+    public static final double Y_INCREMENT = APOTHEM * Math.sqrt(3);
+    public static final double Y_OFFSET = (HEIGHT - (24 * APOTHEM * Math.sqrt(3) + RADIUS * 2)) / 2;
 
     public HexBoard(double width, double height) {
         super(width, height);
@@ -11,17 +15,13 @@ public class HexBoard extends Board {
 
     @Override
     public void render(Cell[][] cells) {
-        final double radius = 18;
-        final double diameter = radius * 2;
-        final double apothem = radius * Math.cos(Math.PI / 6);
-        final double yOffset = apothem * Math.sqrt(3);
-        
         gc.clearRect(0, 0, WIDTH, HEIGHT);
         
-        for (int i = 0; i < 24; i++)
-            for (int j = 0; j < 24; j++) {
-                final double xOffset = i % 2 == 0 ? radius : radius + apothem;
-                renderHexagon(xOffset + (apothem * 2) * j, diameter + yOffset * i, radius, Color.BLACK, false);
+        // render grid
+        for (int i = 0; i < 25; i++)
+            for (int j = 0; j < 25; j++) {
+                final double xOffset = i % 2 == 0 ? APOTHEM : APOTHEM * 2;
+                renderHexagon(xOffset + (APOTHEM * 2) * j, Y_OFFSET + Y_INCREMENT * i, RADIUS, Color.BLACK, false);
             }
         
     }
