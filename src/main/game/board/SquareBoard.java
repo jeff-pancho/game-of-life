@@ -1,23 +1,12 @@
-package main.game;
+package main.game.board;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.game.cell.Cell;
 import main.game.lifeform.Lifeform;
 
-public class Board extends Canvas {
-    public static final int TILE_SIZE = 35;
-    public static final int SIZE = 25;
-    public static final int WIDTH = TILE_SIZE * SIZE;
-    public static final int HEIGHT = TILE_SIZE * SIZE;
-    public static final Color gridColor = Color.rgb(77, 57, 81);
-    
-    private GraphicsContext gc;
-    
-    public Board(double width, double height) {
+public class SquareBoard extends Board {
+    public SquareBoard(double width, double height) {
         super(width, height);
-        this.gc = getGraphicsContext2D();
     }
     
     public void render(Cell[][] cells) {
@@ -44,10 +33,4 @@ public class Board extends Canvas {
             gc.strokeLine(0, i * TILE_SIZE, HEIGHT, i * TILE_SIZE);
         }
     }
-    
-    private void renderRect(int row, int col, Color color) {
-        gc.setFill(color);
-        gc.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-    }
-
 }

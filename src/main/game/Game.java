@@ -5,6 +5,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import main.game.board.Board;
+import main.game.board.SquareBoard;
 import main.game.cell.Cell;
 import main.game.cell.Land;
 import main.game.lifeform.Herbivore;
@@ -19,7 +21,7 @@ public class Game extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        board = new Board(Board.WIDTH, Board.HEIGHT);
+        board = new SquareBoard(Board.WIDTH, Board.HEIGHT);
         root = new Group(board);
         scene = new Scene(root, Board.WIDTH, Board.HEIGHT);
         initStage(stage, scene);
