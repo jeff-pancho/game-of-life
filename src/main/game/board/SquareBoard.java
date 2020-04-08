@@ -19,7 +19,7 @@ public class SquareBoard extends Board {
                 if (curLife != null)
                     renderRect(row, col, curLife.getColor());
                 else {
-                    Color color = (row + col) % 2 == 0 ? curCell.getColor() : curCell.getAltColor();
+                    Color color = curCell.getColor((row + col) % 2);
                     renderRect(row, col, color);
                 }
             }

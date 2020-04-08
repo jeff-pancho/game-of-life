@@ -6,8 +6,7 @@ import main.game.lifeform.Lifeform;
 public abstract class Cell {
     protected final int row;
     protected final int col;
-    protected Color color;
-    protected Color altColor;
+    protected Color[] colors;
     protected Lifeform lifeform;
     
     public Cell(int row, int col) {
@@ -32,11 +31,8 @@ public abstract class Cell {
         return this.col;
     }
     
-    public Color getColor() {
-        return this.color;
+    public Color getColor(int choice) {
+        return this.colors[choice];
     }
 
-    public Color getAltColor() {
-        return this.altColor;
-    }
 }

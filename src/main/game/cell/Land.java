@@ -6,7 +6,10 @@ public class Land extends Cell {
 
     public Land(int row, int col) {
         super(row, col);
-        this.color = Color.rgb(242, 245, 255);
-        this.altColor = Color.rgb(218, 218, 242);
+        this.colors = new Color[] {
+                Color.rgb(245, 245, 255),
+                Color.rgb(218, 218, 242),
+                Color.rgb(184, 184, 226)
+        };
     }
 }

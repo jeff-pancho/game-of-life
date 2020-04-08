@@ -26,9 +26,13 @@ public class HexBoard extends Board {
                 
                 Cell curCell = cells[row][col];
                 Lifeform curLife = curCell.getLifeform();
-                boolean hasLife = curLife != null;
-                
-                Color color = hasLife ? curLife.getColor() : curCell.getColor();
+                Color color;
+                if (curLife != null) {
+                    color = curLife.getColor();
+                } else {
+                    int offset = row % 2 == 0 ? 0 : 2;
+                    color = curCell.getColor((col + offset) % 3);
+                }
                 
                 renderHexagon(centerX, centerY, RADIUS, color, true);
                 renderHexagon(centerX, centerY, RADIUS, gridColor, false);
