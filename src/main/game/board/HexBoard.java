@@ -14,7 +14,9 @@ public class HexBoard extends Board {
         final double radius = 18;
         final double diameter = radius * 2;
         final double apothem = radius * Math.cos(Math.PI / 6);
-        final double yOffset = Math.sqrt(3 * apothem * apothem);
+        final double yOffset = apothem * Math.sqrt(3);
+        
+        gc.clearRect(0, 0, WIDTH, HEIGHT);
         
         for (int i = 0; i < 24; i++)
             for (int j = 0; j < 24; j++) {
