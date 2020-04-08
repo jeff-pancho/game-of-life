@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.game.board.Board;
+import main.game.board.HexBoard;
 import main.game.board.SquareBoard;
 import main.game.cell.Cell;
 import main.game.cell.Land;
@@ -21,7 +22,9 @@ public class Game extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        board = new SquareBoard(Board.WIDTH, Board.HEIGHT);
+//        board = new SquareBoard(Board.WIDTH, Board.HEIGHT);
+        board = new HexBoard(Board.WIDTH, Board.HEIGHT);
+        
         root = new Group(board);
         scene = new Scene(root, Board.WIDTH, Board.HEIGHT);
         initStage(stage, scene);
@@ -42,32 +45,32 @@ public class Game extends Application {
         
         Lifeform curLife;
         
-        for (Cell[] row : cells)
-            for (Cell curCell : row)
-                if ((curLife = curCell.getLifeform()) != null) {
-                    curLife.update(cells);
-                }
-        
-        for (Cell[] row : cells)
-            for (Cell curCell : row)
-                if ((curLife = curCell.getLifeform()) != null)
-                    curLife.setUpdated(false);
+//        for (Cell[] row : cells)
+//            for (Cell curCell : row)
+//                if ((curLife = curCell.getLifeform()) != null) {
+//                    curLife.update(cells);
+//                }
+//        
+//        for (Cell[] row : cells)
+//            for (Cell curCell : row)
+//                if ((curLife = curCell.getLifeform()) != null)
+//                    curLife.setUpdated(false);
         
     }
     
     private void populateBoard() {
-        for (int row = 0; row < cells.length; row++) {
-            for (int col = 0; col < cells[row].length; col++) {
-                Cell curCell = new Land(row, col);
-                cells[row][col] = curCell;
-                
-                final int randInt = RandomGenerator.nextNumber(100);
-                if (randInt >= 85)
-                    curCell.setLifeform(new Herbivore(row, col));
-                else if (randInt >= 65 && randInt < 85)
-                    curCell.setLifeform(new Plant(row, col));
-            }
-        }
+//        for (int row = 0; row < cells.length; row++) {
+//            for (int col = 0; col < cells[row].length; col++) {
+//                Cell curCell = new Land(row, col);
+//                cells[row][col] = curCell;
+//                
+//                final int randInt = RandomGenerator.nextNumber(100);
+//                if (randInt >= 85)
+//                    curCell.setLifeform(new Herbivore(row, col));
+//                else if (randInt >= 65 && randInt < 85)
+//                    curCell.setLifeform(new Plant(row, col));
+//            }
+//        }
     }
     
     private void initStage(Stage stage, Scene scene) {

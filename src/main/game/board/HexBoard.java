@@ -11,7 +11,16 @@ public class HexBoard extends Board {
 
     @Override
     public void render(Cell[][] cells) {
+        final double radius = 18;
+        final double diameter = radius * 2;
+        final double apothem = radius * Math.cos(Math.PI / 6);
+        final double yOffset = Math.sqrt(3 * apothem * apothem);
         
+        for (int i = 0; i < 24; i++)
+            for (int j = 0; j < 24; j++) {
+                final double xOffset = i % 2 == 0 ? radius : radius + apothem;
+                renderHexagon(xOffset + (apothem * 2) * j, diameter + yOffset * i, radius, Color.BLACK, false);
+            }
         
     }
     
@@ -21,8 +30,9 @@ public class HexBoard extends Board {
         double[] yPt = new double[6];
         
         for (int i = 0; i < 6; i++) {
-            xPt[i] = centerX + radius * Math.cos(sixthDir);
-            yPt[i] = centerY + radius * Math.sin(sixthDir);
+            final double pointDir = Math.PI / 6 + sixthDir * i; 
+            xPt[i] = centerX + radius * Math.cos(pointDir);
+            yPt[i] = centerY + radius * Math.sin(pointDir);
         }
         
         if (fill) {
