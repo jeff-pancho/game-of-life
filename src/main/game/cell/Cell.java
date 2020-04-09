@@ -18,6 +18,7 @@ public abstract class Cell {
         this.col = col;
         this.lifeform = null;
         this.region = region;
+        this.neighbors = new ArrayList<>();
     }
     
     public Lifeform getLifeform() {
