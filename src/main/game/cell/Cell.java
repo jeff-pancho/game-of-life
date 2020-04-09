@@ -1,5 +1,8 @@
 package main.game.cell;
 
+import java.util.ArrayList;
+
+import javafx.geometry.Point2D;
 import main.game.cell.region.Region;
 import main.game.lifeform.Lifeform;
 
@@ -8,6 +11,7 @@ public abstract class Cell {
     protected final int col;
     protected Lifeform lifeform;
     protected Region region;
+    protected ArrayList<Point2D> neighbors;
     
     public Cell(int row, int col, Region region) {
         this.row = row;

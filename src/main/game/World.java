@@ -3,6 +3,7 @@ package main.game;
 import main.game.board.Board;
 import main.game.board.HexBoard;
 import main.game.cell.Cell;
+import main.game.cell.SquareCell;
 import main.game.cell.region.Land;
 import main.game.lifeform.Herbivore;
 import main.game.lifeform.Lifeform;
@@ -43,7 +44,7 @@ public class World {
     private void populateWorld() {
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[row].length; col++) {
-                Cell curCell = new Land(row, col);
+                Cell curCell = new SquareCell(row, col, new Land(), cells);
                 cells[row][col] = curCell;
                 
                 final int randInt = RandomGenerator.nextNumber(100);
