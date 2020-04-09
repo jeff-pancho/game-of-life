@@ -17,7 +17,7 @@ public abstract class Lifeform {
     
     public abstract void update(Cell[][] cells);
     
-    public boolean inBounds(Cell[][] cells, int row, int col) {
+    public static boolean inBounds(Cell[][] cells, int row, int col) {
         return row >= 0 && row < cells.length && col >= 0 && col < cells[row].length;
     }
     
