@@ -1,18 +1,19 @@
 package main.game.cell;
 
-import javafx.scene.paint.Color;
+import main.game.cell.region.Region;
 import main.game.lifeform.Lifeform;
 
 public abstract class Cell {
     protected final int row;
     protected final int col;
-    protected Color[] colors;
     protected Lifeform lifeform;
+    protected Region region;
     
-    public Cell(int row, int col) {
+    public Cell(int row, int col, Region region) {
         this.row = row;
         this.col = col;
         this.lifeform = null;
+        this.region = region;
     }
     
     public Lifeform getLifeform() {
@@ -31,8 +32,8 @@ public abstract class Cell {
         return this.col;
     }
     
-    public Color getColor(int choice) {
-        return this.colors[choice];
+    public Region getRegion() {
+        return this.region;
     }
 
 }

@@ -3,7 +3,7 @@ package main.game;
 import main.game.board.Board;
 import main.game.board.HexBoard;
 import main.game.cell.Cell;
-import main.game.cell.Land;
+import main.game.cell.region.Land;
 import main.game.lifeform.Herbivore;
 import main.game.lifeform.Lifeform;
 import main.game.lifeform.Plant;

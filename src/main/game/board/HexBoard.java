@@ -31,7 +31,7 @@ public class HexBoard extends Board {
                     color = curLife.getColor();
                 } else {
                     int offset = row % 2 == 0 ? 0 : 2;
-                    color = curCell.getColor((col + offset) % 3);
+                    color = curCell.getRegion().getColor((col + offset) % 3);
                 }
                 
                 renderHexagon(centerX, centerY, RADIUS, color, true);

@@ -1,5 +1,6 @@
 module gameOfLife {
     exports main.game.board;
+    exports main.game.cell.region;
     exports main.game.cell;
     exports main.game.lifeform;
     exports main.game;
