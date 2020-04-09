@@ -25,16 +25,11 @@ public class Herbivore extends Lifeform {
         if (updated)
             return;
         
-        final double eightDir = Math.PI / 4;
         List<Point2D> availableCells = new ArrayList<>();
         
-        for (int i = 0; i < 8; i++) {
-            double dir = i * eightDir;
-            int curRow = (int) Math.round(row + Math.sin(dir));
-            int curCol = (int) Math.round(col + Math.cos(dir));
-            
-            if (!inBounds(cells, curRow, curCol))
-                continue;
+        for (Point2D curPt : cells[row][col].getNeighbors()) {
+            int curRow = (int) curPt.getY();
+            int curCol = (int) curPt.getX();
             
             Cell curCell = cells[curRow][curCol];
             Lifeform curLife = curCell.getLifeform();

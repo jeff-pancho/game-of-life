@@ -37,6 +37,10 @@ public abstract class Cell {
         return this.col;
     }
     
+    public ArrayList<Point2D> getNeighbors() {
+        return this.neighbors;
+    }
+    
     public Region getRegion() {
         return this.region;
     }
