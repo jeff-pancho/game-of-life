@@ -42,12 +42,17 @@ public class Plant extends Lifeform implements EdibleForHerbivore {
             Point2D randCell = availableCells.get(randInd);
             int newRow = (int) randCell.getY();
             int newCol = (int) randCell.getX();
-            cells[newRow][newCol].setLifeform(new Plant(newRow, newCol));
-            cells[newRow][newCol].getLifeform().setUpdated(false);
+            giveBirth(cells, newRow, newCol);
         }
         
         updated = true;
         
+    }
+    
+    protected void giveBirth(Cell[][] cells, int newRow, int newCol) {
+        Lifeform newLifeform = new Plant(newRow, newCol);
+        newLifeform.setUpdated(false);
+        cells[newRow][newCol].setLifeform(newLifeform);
     }
 
 }

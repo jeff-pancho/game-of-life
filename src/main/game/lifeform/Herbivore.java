@@ -26,6 +26,8 @@ public class Herbivore extends Lifeform {
             return;
         
         List<Point2D> availableCells = new ArrayList<>();
+        int numOfFood = 0;
+        int herbivoreNeighbors = 0;
         
         for (Point2D curPt : cells[row][col].getNeighbors()) {
             int curRow = (int) curPt.getY();
@@ -34,8 +36,25 @@ public class Herbivore extends Lifeform {
             Cell curCell = cells[curRow][curCol];
             Lifeform curLife = curCell.getLifeform();
             
-            if (curLife == null || curLife instanceof Plant)
+            if (curLife instanceof Herbivore)
+                herbivoreNeighbors++;
+            else if (curLife == null || curLife instanceof EdibleForHerbivore) {
+                if (curLife instanceof EdibleForHerbivore)
+                    numOfFood++;
                 availableCells.add(new Point2D(curCol, curRow));
+            }
+            
+        }
+        
+        // giving birth
+        if (availableCells.size() >= 2 && numOfFood >= 2 && herbivoreNeighbors >= 1) {
+            int randInd = RandomGenerator.nextNumber(availableCells.size());
+            Point2D randCell = availableCells.get(randInd);
+            int newRow = (int) randCell.getY();
+            int newCol = (int) randCell.getX();
+            
+            giveBirth(cells, newRow, newCol);
+            availableCells.remove(randInd);
         }
         
         if (availableCells.size() >= 1) {
@@ -55,6 +74,12 @@ public class Herbivore extends Lifeform {
         
         updated = true;
         
+    }
+    
+    protected void giveBirth(Cell[][] cells, int newRow, int newCol) {
+        Lifeform newLifeform = new Herbivore(newRow, newCol);
+        newLifeform.setUpdated(false);
+        cells[newRow][newCol].setLifeform(newLifeform);
     }
     
 }
