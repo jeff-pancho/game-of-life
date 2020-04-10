@@ -50,9 +50,9 @@ public class World {
                 cells[row][col] = curCell;
                 
                 final int randInt = RandomGenerator.nextNumber(100);
-                if (randInt >= 85)
+                if (randInt >= 80)
                     curCell.setLifeform(new Herbivore(row, col));
-                else if (randInt >= 65 && randInt < 85)
+                else if (randInt >= 60)
                     curCell.setLifeform(new Plant(row, col));
             }
         }

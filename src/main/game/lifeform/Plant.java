@@ -37,7 +37,7 @@ public class Plant extends Lifeform implements EdibleForHerbivore {
                 adjacentPlants++;
         }
         
-        if (adjacentPlants >= 3 && availableCells.size() >= 3) {
+        if (adjacentPlants >= 2 && availableCells.size() >= 3) {
             int randInd = RandomGenerator.nextNumber(availableCells.size());
             Point2D randCell = availableCells.get(randInd);
             int newRow = (int) randCell.getY();
