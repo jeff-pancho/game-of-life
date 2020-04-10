@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import main.game.cell.Cell;
 import main.game.RandomGenerator;
 
-public class Herbivore extends Lifeform {
+public class Herbivore extends Lifeform implements EdibleForCarnivore {
     private int lifespan;
     private int turnsLeft;
 
