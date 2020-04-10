@@ -7,6 +7,7 @@ import main.game.cell.Cell;
 import main.game.cell.HexCell;
 import main.game.cell.SquareCell;
 import main.game.cell.region.Land;
+import main.game.lifeform.Carnivore;
 import main.game.lifeform.Herbivore;
 import main.game.lifeform.Lifeform;
 import main.game.lifeform.Plant;
@@ -54,6 +55,8 @@ public class World {
                     curCell.setLifeform(new Herbivore(row, col));
                 else if (randInt >= 60)
                     curCell.setLifeform(new Plant(row, col));
+                else if (randInt >= 50)
+                    curCell.setLifeform(new Carnivore(row, col));
             }
         }
     }
