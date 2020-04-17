@@ -7,7 +7,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 import main.game.cell.Cell;
-import main.game.RandomGenerator;
 
 public class Plant extends Lifeform implements EdibleForHerbivore {
     private int neighbors;
@@ -32,13 +31,11 @@ public class Plant extends Lifeform implements EdibleForHerbivore {
                neighbors++;
         });
         
-        if (neighbors >= 2 && availableCells.size() >= 3) {
-            int randInd = RandomGenerator.nextNumber(availableCells.size());
-            Point2D randCell = availableCells.get(randInd);
-            int newRow = (int) randCell.getY();
-            int newCol = (int) randCell.getX();
+        boolean canGiveBirth = availableCells.size() >= 3 && neighbors >= 2;
+        
+        chooseRandCell(availableCells, canGiveBirth, (newRow, newCol, randCell) -> {
             giveBirth(cells, newRow, newCol);
-        }
+        });
         
         updated = true;
         

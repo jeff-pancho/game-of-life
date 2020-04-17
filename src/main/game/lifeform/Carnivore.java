@@ -7,7 +7,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 import main.game.cell.Cell;
-import main.game.RandomGenerator;
 
 public class Carnivore extends Lifeform implements EdibleForCarnivore {
     private int lifespan;
@@ -41,28 +40,19 @@ public class Carnivore extends Lifeform implements EdibleForCarnivore {
             }
         });
         
-        // giving birth
-        if (availableCells.size() >= 3 && numOfFood >= 2 && neighbors >= 1) {
-            int randInd = RandomGenerator.nextNumber(availableCells.size());
-            Point2D randCell = availableCells.get(randInd);
-            int newRow = (int) randCell.getY();
-            int newCol = (int) randCell.getX();
-            
-            giveBirth(cells, newRow, newCol);
-            availableCells.remove(randInd);
-        }
+        boolean canGiveBirth = availableCells.size() >= 3 && numOfFood >= 2 && neighbors >= 1;
+        boolean canMove = availableCells.size() >= 1;
         
-        if (availableCells.size() >= 1) {
-            int randInd = RandomGenerator.nextNumber(availableCells.size());
-            Point2D randCell = availableCells.get(randInd);
-            int newRow = (int) randCell.getY();
-            int newCol = (int) randCell.getX();
-            
+        chooseRandCell(availableCells, canGiveBirth, (newRow, newCol, randCell) -> {
+            giveBirth(cells, newRow, newCol);
+            availableCells.remove(randCell);
+        });
+        
+        chooseRandCell(availableCells, canMove, (newRow, newCol, randCell) -> {
             if (cells[newRow][newCol].getLifeform() instanceof EdibleForCarnivore)
                 turnsLeft = lifespan;
-            
             setPos(cells, newRow, newCol);
-        }
+        });
         
         if (turnsLeft-- <= 0)
             cells[row][col].setLifeform(null);
