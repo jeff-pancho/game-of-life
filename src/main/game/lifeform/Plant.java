@@ -10,6 +10,7 @@ import main.game.cell.Cell;
 import main.game.RandomGenerator;
 
 public class Plant extends Lifeform implements EdibleForHerbivore {
+    private int neighbors;
     
     public Plant(int x, int y) {
         super(x, y);
@@ -22,22 +23,16 @@ public class Plant extends Lifeform implements EdibleForHerbivore {
             return;
         
         List<Point2D> availableCells = new ArrayList<>();
-        int adjacentPlants = 0;
+        neighbors = 0;
         
-        for (Point2D curPt : cells[row][col].getNeighbors()) {
-            int curRow = (int) curPt.getY();
-            int curCol = (int) curPt.getX();
-            
-            Cell curCell = cells[curRow][curCol];
-            Lifeform curLife = curCell.getLifeform();
-            
-            if (curLife == null)
-                availableCells.add(new Point2D(curCol, curRow));
-            else if (curLife instanceof Plant)
-                adjacentPlants++;
-        }
+        scan(cells, (curLife, curRow, curCol) -> {
+           if (curLife == null)
+               availableCells.add(new Point2D(curCol, curRow));
+           else if (curLife instanceof Plant)
+               neighbors++;
+        });
         
-        if (adjacentPlants >= 2 && availableCells.size() >= 3) {
+        if (neighbors >= 2 && availableCells.size() >= 3) {
             int randInd = RandomGenerator.nextNumber(availableCells.size());
             Point2D randCell = availableCells.get(randInd);
             int newRow = (int) randCell.getY();
