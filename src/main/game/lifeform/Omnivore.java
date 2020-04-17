@@ -12,6 +12,8 @@ import main.game.RandomGenerator;
 public class Omnivore extends Lifeform implements EdibleForCarnivore {
     private int lifespan;
     private int turnsLeft;
+    private int neighbors;
+    private int numOfFood;
 
     public Omnivore(int row, int col) {
         super(row, col);
@@ -26,28 +28,21 @@ public class Omnivore extends Lifeform implements EdibleForCarnivore {
             return;
         
         List<Point2D> availableCells = new ArrayList<>();
-        int numOfFood = 0;
-        int omnivoreNeighbors = 0;
+        neighbors = 0;
+        numOfFood = 0;
         
-        for (Point2D curPt : cells[row][col].getNeighbors()) {
-            int curRow = (int) curPt.getY();
-            int curCol = (int) curPt.getX();
-            
-            Cell curCell = cells[curRow][curCol];
-            Lifeform curLife = curCell.getLifeform();
-            
+        scan(cells, (curLife, curRow, curCol) -> {
             if (curLife instanceof Omnivore)
-                omnivoreNeighbors++;
+                neighbors++;
             else if (curLife == null || curLife instanceof EdibleForCarnivore || curLife instanceof EdibleForHerbivore) {
                 if (curLife instanceof EdibleForCarnivore || curLife instanceof EdibleForHerbivore)
                     numOfFood++;
                 availableCells.add(new Point2D(curCol, curRow));
             }
-            
-        }
+        });
         
         // giving birth
-        if (availableCells.size() >= 3 && numOfFood >= 1 && omnivoreNeighbors >= 1) {
+        if (availableCells.size() >= 3 && numOfFood >= 1 && neighbors >= 1) {
             int randInd = RandomGenerator.nextNumber(availableCells.size());
             Point2D randCell = availableCells.get(randInd);
             int newRow = (int) randCell.getY();
