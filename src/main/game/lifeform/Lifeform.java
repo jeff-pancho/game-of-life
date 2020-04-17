@@ -1,7 +1,11 @@
 package main.game.lifeform;
 
+import java.util.List;
+import java.util.function.BiConsumer;
+
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
+import main.game.RandomGenerator;
 import main.game.cell.Cell;
 
 public abstract class Lifeform {
@@ -33,6 +37,17 @@ public abstract class Lifeform {
             Lifeform curLife = curCell.getLifeform();
             
             c.accept(curLife, curRow, curCol);
+        }
+    }
+    
+    protected void chooseRandCell(List<Point2D> availableCells, boolean canSearch, BiConsumer<Integer, Integer> c) {
+        if (canSearch) {
+            int randInd = RandomGenerator.nextNumber(availableCells.size());
+            Point2D randCell = availableCells.get(randInd);
+            int newRow = (int) randCell.getY();
+            int newCol = (int) randCell.getX();
+            
+            c.accept(newRow, newCol);
         }
     }
     
