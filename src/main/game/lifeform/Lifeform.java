@@ -1,7 +1,12 @@
 package main.game.lifeform;
 
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import main.game.cell.Cell;
+
+interface TriConsumer<X, Y, Z> {
+    void accept(X a, Y b, Z c);
+}
 
 public abstract class Lifeform {
     protected int row;
@@ -21,6 +26,18 @@ public abstract class Lifeform {
     
     public static boolean inBounds(Cell[][] cells, int row, int col) {
         return row >= 0 && row < cells.length && col >= 0 && col < cells[row].length;
+    }
+    
+    protected void scan(Cell[][] cells, TriConsumer<Lifeform, Integer, Integer> c) {
+        for (Point2D curPt : cells[row][col].getNeighbors()) {
+            int curRow = (int) curPt.getY();
+            int curCol = (int) curPt.getX();
+            
+            Cell curCell = cells[curRow][curCol];
+            Lifeform curLife = curCell.getLifeform();
+            
+            c.accept(curLife, curRow, curCol);
+        }
     }
     
     public void setPos(Cell[][] cells, int newRow, int newCol) {
