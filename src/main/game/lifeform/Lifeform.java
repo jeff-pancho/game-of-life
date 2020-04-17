@@ -4,10 +4,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import main.game.cell.Cell;
 
-interface TriConsumer<X, Y, Z> {
-    void accept(X a, Y b, Z c);
-}
-
 public abstract class Lifeform {
     protected int row;
     protected int col;
