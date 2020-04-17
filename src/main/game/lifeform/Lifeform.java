@@ -39,14 +39,14 @@ public abstract class Lifeform {
         }
     }
     
-    protected void chooseRandCell(List<Point2D> availableCells, boolean canSearch, TriConsumer<Integer, Integer, Integer> c) {
+    protected void chooseRandCell(List<Point2D> availableCells, boolean canSearch, TriConsumer<Integer, Integer, Point2D> c) {
         if (canSearch) {
             int randInd = RandomGenerator.nextNumber(availableCells.size());
             Point2D randCell = availableCells.get(randInd);
             int newRow = (int) randCell.getY();
             int newCol = (int) randCell.getX();
             
-            c.accept(newRow, newCol, randInd);
+            c.accept(newRow, newCol, randCell);
         }
     }
     
