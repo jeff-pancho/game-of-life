@@ -40,7 +40,7 @@ public class Omnivore extends Lifeform implements EdibleForCarnivore {
             }
         });
         
-        boolean canGiveBirth = availableCells.size() >= 3 && numOfFood >= 1 && neighbors >= 1;
+        boolean canGiveBirth = availableCells.size() >= 4 && numOfFood >= 1 && neighbors >= 1;
         boolean canMove = availableCells.size() >= 1;
         
         chooseRandCell(availableCells, canGiveBirth, (newRow, newCol, randCell) -> {

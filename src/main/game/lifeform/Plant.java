@@ -31,7 +31,7 @@ public class Plant extends Lifeform implements EdibleForHerbivore {
                neighbors++;
         });
         
-        boolean canGiveBirth = availableCells.size() >= 3 && neighbors >= 2;
+        boolean canGiveBirth = availableCells.size() >= 2 && neighbors >= 2;
         
         chooseRandCell(availableCells, canGiveBirth, (newRow, newCol, randCell) -> {
             giveBirth(cells, newRow, newCol);
