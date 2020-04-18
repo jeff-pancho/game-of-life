@@ -1,20 +1,35 @@
 package main.game;
 
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.game.board.Board;
+import main.game.board.BoardType;
 
 public class Game extends Application {
     World world;
     Group root;
     Scene scene;
+    BoardType type;
     
     @Override
     public void start(Stage stage) throws Exception {
-        world = new World();
+        List<String> args = getParameters().getRaw();
+        String arg = args.size() > 0 ? args.get(0) : "HEX";
+        switch(arg.toUpperCase()) {
+        case "HEX":
+            type = BoardType.HEX;
+            break;
+        case "SQUARE":
+        default:
+            type = BoardType.SQUARE;
+        }
+        
+        world = new World(type);
         world.init();
         
         root = new Group(world.getBoard());
@@ -37,8 +52,8 @@ public class Game extends Application {
         stage.show();
     }
     
-    public void run() {
-        launch();
+    public void run(String[] args) {
+        launch(args);
     }
 
 }

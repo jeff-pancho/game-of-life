@@ -1,6 +1,7 @@
 package main.game;
 
 import main.game.board.Board;
+import main.game.board.BoardType;
 import main.game.board.HexBoard;
 import main.game.board.SquareBoard;
 import main.game.cell.Cell;
@@ -14,11 +15,22 @@ import main.game.lifeform.Omnivore;
 import main.game.lifeform.Plant;
 
 public class World {
-    Board board;
-    Cell[][] cells;
+    private Board board;
+    private Cell[][] cells;
+    private BoardType type;
     
-    public World() {
-        this.board = new HexBoard(Board.WIDTH, Board.HEIGHT);
+    public World(BoardType type) {
+        this.type = type;
+        
+        switch(this.type) {
+        case HEX:
+            this.board = new HexBoard(Board.WIDTH, Board.HEIGHT);
+            break;
+        case SQUARE:
+        default:
+            this.board = new SquareBoard(Board.WIDTH, Board.HEIGHT);
+        }
+        
         this.cells = new Cell[Board.SIZE][Board.SIZE];
     }
     
@@ -48,7 +60,17 @@ public class World {
     private void populateWorld() {
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[row].length; col++) {
-                Cell curCell = new HexCell(row, col, new Land(), cells);
+                Cell curCell;
+                
+                switch(type) {
+                case HEX:
+                    curCell = new HexCell(row, col, new Land(), cells);
+                    break;
+                case SQUARE:
+                default:
+                    curCell = new SquareCell(row, col, new Land(), cells);
+                }
+                
                 cells[row][col] = curCell;
                 
                 final int randInt = RandomGenerator.nextNumber(100);
